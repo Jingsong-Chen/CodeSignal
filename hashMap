@@ -1,0 +1,43 @@
+from collections import defaultdict
+def hashMap(queryType, query):
+    mapping = defaultdict(lambda: 0)
+    
+    def addTo(value):
+        nonlocal mapping
+        mapping[value[0]] = value[1]
+        return
+    
+    def lookUP(value):
+        nonlocal mapping
+        return mapping[value[0]]
+        
+    def addToKey(value):
+        nonlocal mapping
+        shift = value[0]
+        new_mapping = defaultdict(lambda: 0)
+        for key, val in mapping.items():
+            new_mapping[key+shift] = val
+        return new_mapping
+        
+    def addToValue(value):
+        nonlocal mapping
+        shift = value[0]
+        for key in mapping.keys():
+            mapping[key] += shift
+        return
+        
+    summ = 0
+    for i in range(len(queryType)):
+        typ = queryType[i]
+        value = query[i]
+        if typ == "insert":
+            addTo(value)
+        elif typ == "get":
+            summ += lookUP(value)
+        elif typ == "addToKey":
+            mapping = addToKey(value)
+        elif typ == "addToValue":
+            addToValue(value)
+        else:
+            continue
+    return summ
