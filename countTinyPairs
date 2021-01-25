@@ -1,0 +1,11 @@
+def countTinyPairs(a, b, k):
+    i = 0
+    j = len(b) - 1
+    count = 0
+    while i < len(a):
+        # num = a[i] * 10 ** (b[j] )
+        if int(str(a[i]) + str(b[j])) < k:
+            count += 1
+        i += 1
+        j -= 1
+    return count
