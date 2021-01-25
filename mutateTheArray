@@ -1,0 +1,11 @@
+def mutateTheArray(n, a):
+    b = [0] * len(a)
+    if not len(a):
+        return []
+    for i in range(len(a)):
+        b[i] = a[i]
+        if i - 1 >= 0:
+            b[i] += a[i-1]
+        if i + 1 < len(a):
+            b[i] += a[i+1]
+    return b
